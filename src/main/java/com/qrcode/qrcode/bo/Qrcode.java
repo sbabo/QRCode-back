@@ -31,7 +31,8 @@ public class Qrcode implements Serializable {
         this.id = id;
         this.code = code;
         this.promo = promotion;
-    }
+        //is valid
+            }
 
     public int getId() {
         return id;

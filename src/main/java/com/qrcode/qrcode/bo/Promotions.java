@@ -16,7 +16,7 @@ public class Promotions implements Serializable {
     private int id;
 
     @Column
-    private float montant;
+    private String codePromo;
 
     @OneToMany(mappedBy = "promo", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
     private Set<Qrcode> qrcode;
@@ -24,9 +24,9 @@ public class Promotions implements Serializable {
     public Promotions() {
     }
 
-    public Promotions(int id, float montant) {
+    public Promotions(int id, String codePromo) {
         this.id = id;
-        this.montant = montant;
+        this.codePromo = codePromo;
     }
 
     public Set<Qrcode> getQrcode() {
@@ -45,11 +45,11 @@ public class Promotions implements Serializable {
         this.id = id;
     }
 
-    public float getMontant() {
-        return montant;
+    public String getCodePromo() {
+        return codePromo;
     }
 
-    public void setMontant(float montant) {
-        this.montant = montant;
+    public void setCodePromo(String codePromo) {
+        this.codePromo = codePromo;
     }
 }
