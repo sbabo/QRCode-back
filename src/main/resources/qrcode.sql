@@ -53,16 +53,16 @@ CREATE TABLE `qrcode` (
 
 CREATE TABLE `scanner` (
   `qrcode` int(11) NOT NULL,
-  `utilisateur` int(11) NOT NULL
+  `user` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `utilisateur`
+-- Structure de la table `Users`
 --
 
-CREATE TABLE `utilisateur` (
+CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `login` varchar(50) NOT NULL,
   `email` varchar(50) NOT NULL,
@@ -90,13 +90,13 @@ ALTER TABLE `qrcode`
 -- Index pour la table `scanner`
 --
 ALTER TABLE `scanner`
-  ADD PRIMARY KEY (`qrcode`,`utilisateur`),
-  ADD KEY `FK_utilisateur` (`utilisateur`);
+  ADD PRIMARY KEY (`qrcode`,`user`),
+  ADD KEY `FK_user` (`user`);
 
 --
 -- Index pour la table `utilisateur`
 --
-ALTER TABLE `utilisateur`
+ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -114,7 +114,7 @@ ALTER TABLE `qrcode`
 --
 ALTER TABLE `scanner`
   ADD CONSTRAINT `FK_qrcode` FOREIGN KEY (`qrcode`) REFERENCES `qrcode` (`id`),
-  ADD CONSTRAINT `FK_utilisateur` FOREIGN KEY (`utilisateur`) REFERENCES `utilisateur` (`id`);
+  ADD CONSTRAINT `FK_users` FOREIGN KEY (`user`) REFERENCES `users` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
-
+/*
 public class QRCodeController {
 
     @Autowired
@@ -35,8 +35,7 @@ public class QRCodeController {
     public QRCode updateQRCode(@PathVariable(value = "id") Long id, @Valid @RequestBody QRCode qrCodeDetails) throws QRCodeNotFoundException {
         QRCode qrCode = qrCodeRepository.findById(id).orElseThrow(() -> new QRCodeNotFoundException(id));
 
-        qrCode.setQRCode(qrCodeDetails.getQRCode());
-        qrCode.setUrl(qrCodeDetails.getUrl());
+        qrCode.setCode(qrCodeDetails.getCode());
 
         QRCode updatedQRCode = qrCodeRepository.save(qrCode);
         return updatedQRCode;
@@ -49,3 +48,4 @@ public class QRCodeController {
         return ResponseEntity.ok().build();
     }
 }
+*/

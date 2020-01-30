@@ -1,11 +1,9 @@
-package main.java.com.qrcode.qrcode.bo;
+package com.qrcode.qrcode.bo;
 
 
 import java.io.Serializable;
 import java.util.Set;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "promotions")
@@ -19,7 +17,7 @@ public class Promotions implements Serializable {
     private String codePromo;
 
     @OneToMany(mappedBy = "promo", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
-    private Set<Qrcode> qrcode;
+    private Set<QRCode> qrCodes;
 
     public Promotions() {
     }
@@ -29,12 +27,12 @@ public class Promotions implements Serializable {
         this.codePromo = codePromo;
     }
 
-    public Set<Qrcode> getQrcode() {
-        return qrcode;
+    public Set<QRCode> getQrCodes() {
+        return qrCodes;
     }
 
-    public void setQrcode(Set<Qrcode> qrcode) {
-        this.qrcode = qrcode;
+    public void setQrCodes(Set<QRCode> qrCodes) {
+        this.qrCodes = qrCodes;
     }
 
     public int getId() {

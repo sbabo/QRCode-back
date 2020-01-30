@@ -1,40 +1,38 @@
-package main.java.com.qrcode.qrcode.bo;
+package com.qrcode.qrcode.bo;
 
+import javax.persistence.*;
 import java.io.Serializable;
-import java.io.Serializable;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import java.util.Set;
 
 @Entity
-@Table(name = "utilisateur")
-public class utilisateur implements Serializable {
+@Table(name = "User")
+public class User implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(lenght=50)
+    @Column(length = 50)
     private String login;
 
-    @Column(lenght=50)
-    private String email;
+    @Column(length = 50)
+    String email;
 
-    @Column(lenght=500)
+    @Column(length = 20)
     private String password;
 
     @ManyToMany
-    private Set<Qrcode> qrcode;
+    private Set<QRCode> qrcodeList;
 
-    public utilisateur() {
+    public User() {
     }
 
-    public utilisateur(int id, String login, String email, String password) {
+    public User(int id, String login, String email, String password) {
         this.id = id;
         this.login = login;
         this.email = email;
         this.password = password;
     }
-
     public int getId() {
         return id;
     }
@@ -52,7 +50,7 @@ public class utilisateur implements Serializable {
     }
 
     public String getEmail() {
-        return email;
+         return email;
     }
 
     public void setEmail(String email) {
@@ -65,5 +63,13 @@ public class utilisateur implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Set<QRCode> getQrcodeList() {
+        return qrcodeList;
+    }
+
+    public void setQrcodeList(Set<QRCode> qrcodeList) {
+        this.qrcodeList = qrcodeList;
     }
 }
