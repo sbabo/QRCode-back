@@ -3,7 +3,6 @@ package com.qrcode.qrcode.bo;
 import java.io.Serializable;
 import java.util.Set;
 import javax.persistence.*;
-import com.qrcode.qrcode.bo.User;
 
 @Entity
 @Table(name = "QRCode")
@@ -13,7 +12,7 @@ public class QRCode implements Serializable {
     private int id;
 
     @Column(length=50)
-    private String code;
+    private String codeImage;
 
 
     @ManyToOne
@@ -26,9 +25,9 @@ public class QRCode implements Serializable {
     public QRCode() {
     }
 
-    public QRCode(int id, String code, Promotions promotion) {
+    public QRCode(int id, String codeImage, Promotions promotion) {
         this.id = id;
-        this.code = code;
+        this.codeImage = codeImage;
         this.promo = promotion;
     }
 
@@ -48,11 +47,11 @@ public class QRCode implements Serializable {
         this.promo = promo;
     }
 
-    public String getCode() {
-        return code;
+    public String getCodeImage() {
+        return codeImage;
     }
 
-    public void setCode(String code) {
-        this.code = code;
+    public void setCodeImage(String codeImage) {
+        this.codeImage = codeImage;
     }
 }

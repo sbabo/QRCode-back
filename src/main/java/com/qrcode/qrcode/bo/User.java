@@ -1,5 +1,7 @@
 package com.qrcode.qrcode.bo;
 
+import org.mindrot.jbcrypt.BCrypt;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Set;
@@ -13,10 +15,10 @@ public class User implements Serializable {
     private int id;
 
     @Column(length = 50)
-    private String login;
+    private String nickname;
 
     @Column(length = 50)
-    String email;
+    private String login;
 
     @Column(length = 20)
     private String password;
@@ -24,14 +26,17 @@ public class User implements Serializable {
     @ManyToMany
     private Set<QRCode> qrcodeList;
 
+    @ManyToMany
+    private Set<QRCode> codeList;
+
     public User() {
     }
 
-    public User(int id, String login, String email, String password) {
+    public User(int id, String login, String nickname, String password) {
         this.id = id;
         this.login = login;
-        this.email = email;
-        this.password = password;
+        this.nickname = nickname;
+        this.password = this.hashPassword(password);
     }
     public int getId() {
         return id;
@@ -49,12 +54,12 @@ public class User implements Serializable {
         this.login = login;
     }
 
-    public String getEmail() {
-         return email;
+    public String getNickname() {
+         return nickname;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 
     public String getPassword() {
@@ -71,5 +76,17 @@ public class User implements Serializable {
 
     public void setQrcodeList(Set<QRCode> qrcodeList) {
         this.qrcodeList = qrcodeList;
+    }
+
+    public Set<QRCode> getCodeList() {
+        return codeList;
+    }
+
+    public void setCodeList(Set<QRCode> codeList) {
+        this.codeList = codeList;
+    }
+
+    private String hashPassword(String password) {
+        return BCrypt.hashpw(password, BCrypt.gensalt());
     }
 }
