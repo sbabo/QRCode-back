@@ -8,7 +8,7 @@ import org.springframework.data.rest.core.annotation.RestResource;
 
 
 public interface CodeRepository extends JpaRepository<Code, Long> {
-
+/*
     @RestResource(path="by-code")
-    Code findByCode(@Param("data") String code);
-}
+    Code findByCode(@Param("data") String codePromo);
+*/}

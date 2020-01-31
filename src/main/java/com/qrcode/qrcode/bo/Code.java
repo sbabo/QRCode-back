@@ -10,6 +10,7 @@ import java.util.Date;
 public class Code implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
     @Column(unique = true)
     private String codePromo;
@@ -20,6 +21,9 @@ public class Code implements Serializable {
 
     @Temporal(TemporalType.DATE)
     private Date dateFin;
+
+    @OneToOne(mappedBy = "codePromo")
+    private QRCode qrCode;
 
     public Code() {
         super();

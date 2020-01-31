@@ -1,5 +1,8 @@
 package com.qrcode.qrcode.bo;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import java.io.Serializable;
 import java.util.Set;
 import javax.persistence.*;
@@ -9,26 +12,25 @@ import javax.persistence.*;
 public class QRCode implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private int id;
 
     @Column(length=50)
     private String codeImage;
-
-
-    @ManyToOne
-    @JoinColumn(name = "id_promotion")
-    private Promotions promo;
-
-    @ManyToMany
+    
+    @OneToOne(cascade = CascadeType.ALL)
+    private Code codePromo;
+/*
+    @OneToMany(mappedBy = "qrcode")
     private Set<User> users;
-
+*/
     public QRCode() {
     }
 
-    public QRCode(int id, String codeImage, Promotions promotion) {
+    public QRCode(int id, String codeImage, Code codePromo) {
         this.id = id;
         this.codeImage = codeImage;
-        this.promo = promotion;
+        this.codePromo = codePromo;
     }
 
     public int getId() {
@@ -39,12 +41,12 @@ public class QRCode implements Serializable {
         this.id = id;
     }
 
-    public Promotions getPromo() {
-        return promo;
+    public Code getCodePromo() {
+        return codePromo;
     }
 
-    public void setPromo(Promotions promo) {
-        this.promo = promo;
+    public void setCodePromo(Code codePromo) {
+        this.codePromo = codePromo;
     }
 
     public String getCodeImage() {

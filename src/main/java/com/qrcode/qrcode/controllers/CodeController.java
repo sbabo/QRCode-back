@@ -16,7 +16,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.Positive;
 import java.awt.print.Book;
 import java.util.List;
-
+/*
 @Validated
 @RestController
 @RequestMapping("/codes")
@@ -32,4 +32,4 @@ public class CodeController {
         headers.add("X-Users-Total", Long.toString(codes.getTotalElements()));
         return new ResponseEntity<>(codes.getContent(), headers, HttpStatus.OK);
     }
-}
+}*/

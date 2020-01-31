@@ -12,6 +12,7 @@ public class User implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private int id;
 
     @Column(length = 50)
@@ -23,12 +24,16 @@ public class User implements Serializable {
     @Column(length = 20)
     private String password;
 
+    @ManyToOne
+    @JoinColumn(name = "qrcode_id")
+    private QRCode qrcode;
+/*
     @ManyToMany
     private Set<QRCode> qrcodeList;
 
     @ManyToMany
     private Set<QRCode> codeList;
-
+*/
     public User() {
     }
 
@@ -69,7 +74,7 @@ public class User implements Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
-
+/*
     public Set<QRCode> getQrcodeList() {
         return qrcodeList;
     }
@@ -85,7 +90,7 @@ public class User implements Serializable {
     public void setCodeList(Set<QRCode> codeList) {
         this.codeList = codeList;
     }
-
+*/
     private String hashPassword(String password) {
         return BCrypt.hashpw(password, BCrypt.gensalt());
     }
