@@ -18,21 +18,13 @@ public class QRCode implements Serializable {
     @Column(length=50)
     private String codeImage;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @MapsId
-    private Code codePromo;
 
-/*
-    @OneToMany(mappedBy = "qrcode")
-    private Set<User> users;
-*/
-    public QRCode() {
-    }
+    public QRCode() { super(); }
 
-    public QRCode(Long id, String codeImage, Code codePromo) {
+    public QRCode(Long id, String codeImage) {
+        super();
         this.id = id;
         this.codeImage = codeImage;
-        this.codePromo = codePromo;
     }
 
     public Long getId() {
@@ -41,14 +33,6 @@ public class QRCode implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Code getCodePromo() {
-        return codePromo;
-    }
-
-    public void setCodePromo(Code codePromo) {
-        this.codePromo = codePromo;
     }
 
     public String getCodeImage() {

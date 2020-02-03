@@ -12,8 +12,10 @@ public class Code implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
+
     @Column(name = "codePromo")
     private String codePromo;
+
     private String description;
 
     @Temporal(TemporalType.DATE)
@@ -22,20 +24,21 @@ public class Code implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date dateFin;
 
-    @OneToOne(mappedBy = "codePromo")
+    @OneToOne(cascade = CascadeType.ALL)
     private QRCode qrCode;
 
     public Code() {
         super();
     }
 
-    public Code(Long id, String codePromo, String description, Date dateDebut, Date dateFin) {
+    public Code(Long id, String codePromo, String description, Date dateDebut, Date dateFin, QRCode qrCode) {
         super();
         this.id = id;
         this.codePromo = codePromo;
         this.description = description;
         this.dateDebut = dateDebut;
         this.dateFin = dateFin;
+        this.qrCode = qrCode;
     }
 
     public Long getId() {
@@ -78,4 +81,11 @@ public class Code implements Serializable {
         this.dateFin = dateFin;
     }
 
+    public QRCode getQrCode() {
+        return qrCode;
+    }
+
+    public void setQrCode(QRCode qrCode) {
+        this.qrCode = qrCode;
+    }
 }
