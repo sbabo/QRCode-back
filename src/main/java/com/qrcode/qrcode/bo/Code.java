@@ -13,6 +13,8 @@ public class Code implements Serializable {
     @Column(name = "id")
     private Long id;
 
+    private String libellePromotion;
+
     @Column(name = "Promotion")
     private int promotion;
 
@@ -31,9 +33,10 @@ public class Code implements Serializable {
         super();
     }
 
-    public Code(Long id, int promotion, String description, Date dateDebut, Date dateFin, QRCode qrCode) {
+    public Code(Long id, String libellePromotion, int promotion, String description, Date dateDebut, Date dateFin, QRCode qrCode) {
         super();
         this.id = id;
+        this.libellePromotion = libellePromotion;
         this.promotion = promotion;
         this.description = description;
         this.dateDebut = dateDebut;
@@ -47,6 +50,14 @@ public class Code implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getLibellePromotion() {
+        return libellePromotion;
+    }
+
+    public void setLibellePromotion(String libellePromotion) {
+        this.libellePromotion = libellePromotion;
     }
 
     public int getPromotion() {
