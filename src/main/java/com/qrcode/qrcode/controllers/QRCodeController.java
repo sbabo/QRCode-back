@@ -4,7 +4,6 @@ import com.qrcode.qrcode.Exceptions.QRCodeNotFoundException;
 import com.qrcode.qrcode.bo.Code;
 import com.qrcode.qrcode.bo.QRCode;
 import com.qrcode.qrcode.repository.CodeRepository;
-import com.qrcode.qrcode.repository.QRCodeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

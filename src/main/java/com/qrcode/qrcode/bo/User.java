@@ -3,30 +3,50 @@ package com.qrcode.qrcode.bo;
 import org.mindrot.jbcrypt.BCrypt;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "User")
-public class User implements Serializable {
+@Table(name = "Users",
+        uniqueConstraints = {
+            @UniqueConstraint(columnNames = "username"),
+            @UniqueConstraint(columnNames = "email")
+        })
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private int id;
+    private Long id;
 
-    @Column(length = 50)
-    private String nickname;
+    @NotBlank
+    @Size(max = 20)
+    private String username;
 
-    @Column(length = 50)
-    private String login;
+    @NotBlank
+    @Size(max = 50)
+    @Email
+    private String email;
 
+    @NotBlank
+    @Size(max = 120)
     @Column(length = 20)
     private String password;
 
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable( name = "user_roles",
+                joinColumns = @JoinColumn(name = "user_id"),
+                inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles = new HashSet<>();
+
+    /*
     @ManyToOne
     @JoinColumn(name = "qrcode_id")
-    private QRCode qrcode;
+    private QRCode qrcode;*/
 /*
     @ManyToMany
     private Set<QRCode> qrcodeList;
@@ -37,34 +57,34 @@ public class User implements Serializable {
     public User() {
     }
 
-    public User(int id, String login, String nickname, String password) {
-        this.id = id;
-        this.login = login;
-        this.nickname = nickname;
-        this.password = this.hashPassword(password);
+    public User(String username, String email, String password) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
     }
-    public int getId() {
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public String getLogin() {
-        return login;
+    public String getUsername() {
+        return username;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public String getNickname() {
-         return nickname;
+    public String getEmail() {
+        return email;
     }
 
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {
@@ -74,24 +94,12 @@ public class User implements Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
-/*
-    public Set<QRCode> getQrcodeList() {
-        return qrcodeList;
+
+    public Set<Role> getRoles() {
+        return roles;
     }
 
-    public void setQrcodeList(Set<QRCode> qrcodeList) {
-        this.qrcodeList = qrcodeList;
-    }
-
-    public Set<QRCode> getCodeList() {
-        return codeList;
-    }
-
-    public void setCodeList(Set<QRCode> codeList) {
-        this.codeList = codeList;
-    }
-*/
-    private String hashPassword(String password) {
-        return BCrypt.hashpw(password, BCrypt.gensalt());
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 }
