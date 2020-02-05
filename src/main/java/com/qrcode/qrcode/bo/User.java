@@ -7,6 +7,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -43,17 +44,13 @@ public class User {
                 inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
-    /*
-    @ManyToOne
-    @JoinColumn(name = "qrcode_id")
-    private QRCode qrcode;*/
-/*
-    @ManyToMany
-    private Set<QRCode> qrcodeList;
 
-    @ManyToMany
-    private Set<QRCode> codeList;
-*/
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable( name = "user_codes",
+                joinColumns = @JoinColumn(name = "user_id"),
+                inverseJoinColumns = @JoinColumn(name = "code_id"))
+    private Set<Code> codes = new HashSet<>();
+
     public User() {
     }
 
@@ -101,5 +98,13 @@ public class User {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public Set<Code> getCodes() {
+        return codes;
+    }
+
+    public void setCodes(Set<Code> codes) {
+        this.codes = codes;
     }
 }
