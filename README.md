@@ -51,7 +51,9 @@ Pour lancer les tests :
 ```
 
 ## Auteur
-- Samuel
+- Samuel BABO
+- Justin GENDRON
+- Martin LEMEE
 
 ## Licence
 Ce projet est sous licence MIT.
